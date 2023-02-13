@@ -16,7 +16,7 @@ def tempalte_generater(address=None, port=None):
         return "{{flow}} {address} {{flow}}-port {range} {port}".format(address=network_convert(address), range=range, port=port)
     elif address:
         return "{{flow}} {address}".format(address=network_convert(address))
-    elif port:
+    elif port: 
         return "{{flow}}-port {range} {port}".format(range=range, port=port)
 
 def args_processor(args):
@@ -109,14 +109,14 @@ def direction_controller(rule_number, action, proto, reverse,
 
 def args_manager():
     parser = argparse.ArgumentParser(description='ACL generater')
-    parser.add_argument('-src', help='策略源地址, 必选参数之一')
-    parser.add_argument('-dst', help='策略目的地址, 必选参数之一')
-    parser.add_argument('-srcp', help='策略源端口, 可选参数')
-    parser.add_argument('-dstp', help='策略目的端口, 可选参数')
-    parser.add_argument('-start', type=int, help='策略编号的起始数, 可选参数', default=0)
-    parser.add_argument('-proto', help='协议, ip/tcp/udp, 缺省值: ip or tcp', default='ip')
-    parser.add_argument('-action', help='策略行为, permit/deny, 缺省值: permit', default='permit')
-    parser.add_argument('--reverse', help='生成反向策略', action="store_true")
+    parser.add_argument('-src', help='源地址, 必选参数')
+    parser.add_argument('-dst', help='目的地址, 必选参数')
+    parser.add_argument('-srcp', help='源端口, 可选参数')
+    parser.add_argument('-dstp', help='目的端口, 可选参数')
+    parser.add_argument('-start', type=int, help='规则号起始数, 可选参数, 默认为0', default=0)
+    parser.add_argument('-proto', help='协议, 可选参数: ip/tcp/udp', default='ip')
+    parser.add_argument('-action', help='行为, 可选参数: permit/deny, 默认为permit', default='permit')
+    parser.add_argument('--reverse', help='生成反向ACL', action="store_true")
     args = parser.parse_args()
     return args
 
